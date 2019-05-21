@@ -3,14 +3,10 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter List Test App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: WordList(),
     );
   }
@@ -22,7 +18,7 @@ class WordList extends StatefulWidget {
 }
 
 class _WordListState extends State<WordList> {
-  List<String> _wordListItem = ["the","of","and","a","to","in","is","you","that",
+  List<String> _wordList = ["the","of","and","a","to","in","is","you","that",
   "it","he","was","for","on","are","as","with","his","they","I","at","be","this",
   "have","from","or","one","had","by","word","but","not","what","all","were","we",
   "when","your","can","said","there","use","an","each","which","she","do","how",
@@ -40,9 +36,9 @@ class _WordListState extends State<WordList> {
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          if (index < _wordListItem.length) {
+          if (index < _wordList.length) {
             return new ListTile(
-              title: new Text(_wordListItem[index]),
+              title: new Text(_wordList[index]),
             );
           }
         }
