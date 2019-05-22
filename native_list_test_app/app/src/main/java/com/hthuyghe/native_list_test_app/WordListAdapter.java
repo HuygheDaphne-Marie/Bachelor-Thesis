@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 
 public class WordListAdapter extends RecyclerView.Adapter<WordListItemHolder> {
 
-    String[] words = {};
+    private String[] words = {};
 
     @NonNull
     @Override
     public WordListItemHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.word_list_item, viewGroup);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.word_list_item, viewGroup, false);
         return new WordListItemHolder(v);
     }
 

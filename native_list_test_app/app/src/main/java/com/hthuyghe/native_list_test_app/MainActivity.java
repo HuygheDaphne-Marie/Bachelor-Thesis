@@ -2,6 +2,7 @@ package com.hthuyghe.native_list_test_app;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         wordListRecyclerAdapter.setWords(wordList);
 
         recyclerView = findViewById(R.id.word_list_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(wordListRecyclerAdapter);
         recyclerView.setHasFixedSize(true);
 
