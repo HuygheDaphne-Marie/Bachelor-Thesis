@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 void main() => runApp(MyApp());
 
@@ -11,25 +12,39 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: TimerApp(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+class TimerApp extends StatefulWidget {
+  TimerApp({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _TimerAppState createState() => _TimerAppState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _TimerAppState extends State<TimerApp> {
+  int _startTime = new DateTime.now().millisecondsSinceEpoch;
+  int _miliseconds = 0;
+  int _seconds = 0;
+  int _minutes = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(new Duration(milliseconds:  (1000~/60)), (Timer timer) {
+      int timeDiff = new DateTime.now().millisecondsSinceEpoch - _startTime;
+      double seconds = timeDiff / 1000;
+      double minutes = seconds / 60;
+      double displaySeconds = seconds % 60;
+      double displayMilis = timeDiff % 1000 / 10;
+
+      setState(() {
+        _miliseconds = displayMilis.floor();
+        _seconds = displaySeconds.floor();
+        _minutes = minutes.floor();
+      });
     });
   }
 
@@ -37,26 +52,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Flutter Demo Home Page'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+        child: new Text(
+            "${_minutes < 10 ? "0"+_minutes.toString() : _minutes}:${_seconds < 10 ? "0"+_seconds.toString() : _seconds}:${_miliseconds < 10 ? "0"+_miliseconds.toString() : _miliseconds}"
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
