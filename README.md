@@ -6,3 +6,6 @@ There are 3 diffrent test senarios for each framework and also three for native 
 
 ### List test (word list):
 This test senario was aimed at seeing how well the codebase can keep up with animating a list that's being rapidly scrolled trough. 
+
+## Timer test:
+This test senario was made to see how quickly the app can update the UI.
